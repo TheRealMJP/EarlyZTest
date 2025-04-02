@@ -42,6 +42,8 @@ public class Settings
         bool ForceEarlyZ = false;
 
         bool ClearDepthToZero = false;
+
+        bool BarrierBetweenDraws = false;
     }
 
     [ExpandGroup(false)]

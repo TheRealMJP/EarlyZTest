@@ -62,6 +62,7 @@ namespace AppSettings
     extern UAVWriteModesSetting UAVWriteMode;
     extern BoolSetting ForceEarlyZ;
     extern BoolSetting ClearDepthToZero;
+    extern BoolSetting BarrierBetweenDraws;
     extern BoolSetting EnableVSync;
 
     struct AppSettingsCBuffer
@@ -69,6 +70,7 @@ namespace AppSettings
         bool32 EnableDepthWrites;
         bool32 ReverseTriangleOrder;
         bool32 ClearDepthToZero;
+        bool32 BarrierBetweenDraws;
     };
 
     extern ConstantBuffer CBuffer;

@@ -20,4 +20,5 @@
 struct TestConstants
 {
     DescriptorIndex OutputTexture;
+    ShaderBool DrawIndex;
 };

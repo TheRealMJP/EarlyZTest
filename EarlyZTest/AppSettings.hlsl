@@ -5,6 +5,7 @@ struct AppSettings_CBLayout
     bool EnableDepthWrites;
     bool ReverseTriangleOrder;
     bool ClearDepthToZero;
+    bool BarrierBetweenDraws;
 };
 
 ConstantBuffer<AppSettings_CBLayout> AppSettingsCB : register(b12);
@@ -14,6 +15,7 @@ struct AppSettings_Values
     bool EnableDepthWrites;
     bool ReverseTriangleOrder;
     bool ClearDepthToZero;
+    bool BarrierBetweenDraws;
     int DiscardMode;
     int DepthExportMode;
     int UAVWriteMode;
@@ -25,6 +27,7 @@ static const AppSettings_Values AppSettings =
     AppSettingsCB.EnableDepthWrites,
     AppSettingsCB.ReverseTriangleOrder,
     AppSettingsCB.ClearDepthToZero,
+    AppSettingsCB.BarrierBetweenDraws,
     DiscardMode_,
     DepthExportMode_,
     UAVWriteMode_,

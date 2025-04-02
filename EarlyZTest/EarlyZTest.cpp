@@ -171,12 +171,32 @@ void EarlyZTest::Render(const Timer& timer)
     TestConstants testConstants =
     {
         .OutputTexture = useUAV ? mainTarget.UAV : InvalidDescriptorIndex,
+        .DrawIndex = 0,
     };
     DX12::BindTempConstantBuffer(cmdList, testConstants, URS_ConstantBuffers + 0, CmdListMode::Graphics);
 
     cmdList->BeginQuery(queryHeap, D3D12_QUERY_TYPE_PIPELINE_STATISTICS, 0);
 
-    cmdList->DrawInstanced(3, 2, 0, 0);
+    cmdList->DrawInstanced(3, 1, 0, 0);
+
+    if (AppSettings::BarrierBetweenDraws)
+    {
+        BarrierBatchBuilder barrierBuilder;
+        D3D12_GLOBAL_BARRIER globalBarrier =
+        {
+            .SyncBefore = D3D12_BARRIER_SYNC_ALL,
+            .SyncAfter = D3D12_BARRIER_SYNC_ALL,
+            .AccessBefore = D3D12_BARRIER_ACCESS_COMMON,
+            .AccessAfter = D3D12_BARRIER_ACCESS_COMMON,
+        };
+        barrierBuilder.Add(globalBarrier);
+        DX12::Barrier(cmdList, barrierBuilder.Build());
+    }
+
+    testConstants.DrawIndex = 1;
+    DX12::BindTempConstantBuffer(cmdList, testConstants, URS_ConstantBuffers + 0, CmdListMode::Graphics);
+
+    cmdList->DrawInstanced(3, 1, 0, 0);
 
     cmdList->EndQuery(queryHeap, D3D12_QUERY_TYPE_PIPELINE_STATISTICS, 0);
     cmdList->ResolveQueryData(queryHeap, D3D12_QUERY_TYPE_PIPELINE_STATISTICS, 0, 1, queryReadbackBuffers[DX12::CurrFrameIdx].Resource, 0);

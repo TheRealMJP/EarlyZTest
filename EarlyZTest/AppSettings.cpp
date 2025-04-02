@@ -59,6 +59,7 @@ namespace AppSettings
     UAVWriteModesSetting UAVWriteMode;
     BoolSetting ForceEarlyZ;
     BoolSetting ClearDepthToZero;
+    BoolSetting BarrierBetweenDraws;
     BoolSetting EnableVSync;
 
     ConstantBuffer CBuffer;
@@ -94,6 +95,9 @@ namespace AppSettings
         ClearDepthToZero.Initialize("ClearDepthToZero", "Test Config", "Clear Depth To Zero", "", false);
         Settings.AddSetting(&ClearDepthToZero);
 
+        BarrierBetweenDraws.Initialize("BarrierBetweenDraws", "Test Config", "Barrier Between Draws", "", false);
+        Settings.AddSetting(&BarrierBetweenDraws);
+
         EnableVSync.Initialize("EnableVSync", "Debug", "Enable VSync", "Enables or disables vertical sync during Present", true);
         Settings.AddSetting(&EnableVSync);
 
@@ -116,6 +120,7 @@ namespace AppSettings
         cbData.EnableDepthWrites = EnableDepthWrites;
         cbData.ReverseTriangleOrder = ReverseTriangleOrder;
         cbData.ClearDepthToZero = ClearDepthToZero;
+        cbData.BarrierBetweenDraws = BarrierBetweenDraws;
 
         CBuffer.MapAndSetData(cbData);
     }

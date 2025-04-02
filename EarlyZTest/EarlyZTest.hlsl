@@ -11,17 +11,18 @@ struct VSOutput
     uint TriIndex : TRIINDEX;
 };
 
-VSOutput VSMain(in uint vertexIndex : SV_VertexID, in uint instanceIndex : SV_InstanceID)
+VSOutput VSMain(in uint vertexIndex : SV_VertexID)
 {
+    uint triangleIndex = CB.DrawIndex;
     if (AppSettings.ReverseTriangleOrder)
-        instanceIndex = (instanceIndex + 1) % 2;
+        triangleIndex = (triangleIndex + 1) % 2;
 
     float4 position = float4(-0.5f, -0.5f, 1.0f, 1.0f);
     if (vertexIndex == 1)
         position.xy = float2(0.0f, 0.75f);
     else if(vertexIndex == 2)
         position.xy = float2(0.5f, -0.5f);
-    if (instanceIndex == 1)
+    if (triangleIndex == 1)
     {
         position.y *= -1.0f;
         position.z = 0.5f;
@@ -29,8 +30,8 @@ VSOutput VSMain(in uint vertexIndex : SV_VertexID, in uint instanceIndex : SV_In
 
     VSOutput output;
     output.Position = position;
-    output.Color = instanceIndex == 1 ? float4(0.1f, 0.9f, 0.1f, 1.0f) : float4(0.9f, 0.1f, 0.1f, 1.0f);
-    output.TriIndex = instanceIndex;
+    output.Color = triangleIndex == 1 ? float4(0.1f, 0.9f, 0.1f, 1.0f) : float4(0.9f, 0.1f, 0.1f, 1.0f);
+    output.TriIndex = triangleIndex;
     return output;
 }
 
