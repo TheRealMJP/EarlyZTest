@@ -61,12 +61,14 @@ namespace AppSettings
     extern DepthExportModesSetting DepthExportMode;
     extern UAVWriteModesSetting UAVWriteMode;
     extern BoolSetting ForceEarlyZ;
+    extern BoolSetting ClearDepthToZero;
     extern BoolSetting EnableVSync;
 
     struct AppSettingsCBuffer
     {
         bool32 EnableDepthWrites;
         bool32 ReverseTriangleOrder;
+        bool32 ClearDepthToZero;
     };
 
     extern ConstantBuffer CBuffer;

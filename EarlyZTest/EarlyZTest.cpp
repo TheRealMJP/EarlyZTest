@@ -147,7 +147,7 @@ void EarlyZTest::Render(const Timer& timer)
 
         float clearColor[4] = { 0.2f, 0.4f, 0.8f, 1.0f };
         cmdList->ClearRenderTargetView(rtvHandles[0], clearColor, 0, nullptr);
-        cmdList->ClearDepthStencilView(depthBuffer.DSV, D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0, 0, nullptr);
+        cmdList->ClearDepthStencilView(depthBuffer.DSV, D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, AppSettings::ClearDepthToZero ? 0.0f : 1.0f, 0, 0, nullptr);
     }
 
     const bool useUAV = AppSettings::UAVWriteMode != UAVWriteModes::NoUAV;

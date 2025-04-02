@@ -58,6 +58,7 @@ namespace AppSettings
     DepthExportModesSetting DepthExportMode;
     UAVWriteModesSetting UAVWriteMode;
     BoolSetting ForceEarlyZ;
+    BoolSetting ClearDepthToZero;
     BoolSetting EnableVSync;
 
     ConstantBuffer CBuffer;
@@ -90,6 +91,9 @@ namespace AppSettings
         ForceEarlyZ.Initialize("ForceEarlyZ", "Test Config", "Force Early Z", "", false);
         Settings.AddSetting(&ForceEarlyZ);
 
+        ClearDepthToZero.Initialize("ClearDepthToZero", "Test Config", "Clear Depth To Zero", "", false);
+        Settings.AddSetting(&ClearDepthToZero);
+
         EnableVSync.Initialize("EnableVSync", "Debug", "Enable VSync", "Enables or disables vertical sync during Present", true);
         Settings.AddSetting(&EnableVSync);
 
@@ -111,6 +115,7 @@ namespace AppSettings
         AppSettingsCBuffer cbData;
         cbData.EnableDepthWrites = EnableDepthWrites;
         cbData.ReverseTriangleOrder = ReverseTriangleOrder;
+        cbData.ClearDepthToZero = ClearDepthToZero;
 
         CBuffer.MapAndSetData(cbData);
     }

@@ -40,6 +40,8 @@ public class Settings
 
         [ShaderCompileTimeConstant(true)]
         bool ForceEarlyZ = false;
+
+        bool ClearDepthToZero = false;
     }
 
     [ExpandGroup(false)]
