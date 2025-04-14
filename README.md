@@ -5,6 +5,8 @@ A simple D3D12 app for testing and observing Z culling behavior.
 
 This app allows you to re-create various scenarios that may or may not interact with the hardware's ability to cull pixel/fragement shaders based on early depth testing. The results are visualized as two simple colored triangles for simplicity, and a pipeline stats query is used to measure and display the number of pixel shader invocations that occurred when drawing these two triangles. This invocation count is displayed in the window, which makes it possible to determine how many pixel shader theads were culled before they could be executed.
 
+For more information, see [the blog post that this app was made for](https://therealmjp.github.io/posts/to-earlyz-or-not-to-earlyz/).
+
 ## Settings
 
 * `Enable Depth Writes` - enables or disables depth writes in the depth/stencil state of the PSO (depth testing is always enabled)
