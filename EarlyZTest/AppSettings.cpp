@@ -74,28 +74,28 @@ namespace AppSettings
 
         Settings.AddGroup("Debug", false);
 
-        EnableDepthWrites.Initialize("EnableDepthWrites", "Test Config", "Enable Depth Writes", "", false);
+        EnableDepthWrites.Initialize("EnableDepthWrites", "Test Config", "Enable Depth Writes", "enables or disables depth writes in the depth/stencil state of the PSO (depth testing is always enabled)", false);
         Settings.AddSetting(&EnableDepthWrites);
 
-        ReverseTriangleOrder.Initialize("ReverseTriangleOrder", "Test Config", "Reverse Triangle Order", "", false);
+        ReverseTriangleOrder.Initialize("ReverseTriangleOrder", "Test Config", "Reverse Triangle Order", "if disabled, the two triangles are drawn back-to-front. If enabled, the triangles are drawn front-to-back", false);
         Settings.AddSetting(&ReverseTriangleOrder);
 
-        DiscardMode.Initialize("DiscardMode", "Test Config", "Discard Mode", "", DiscardModes::NoDiscard, 3, DiscardModesLabels);
+        DiscardMode.Initialize("DiscardMode", "Test Config", "Discard Mode", "controls whether discard is present in the pixel shader, and how it's used", DiscardModes::NoDiscard, 3, DiscardModesLabels);
         Settings.AddSetting(&DiscardMode);
 
-        DepthExportMode.Initialize("DepthExportMode", "Test Config", "Depth Export Mode", "", DepthExportModes::NoDepthExport, 4, DepthExportModesLabels);
+        DepthExportMode.Initialize("DepthExportMode", "Test Config", "Depth Export Mode", "controls how the pixel shader outputs/exports a manual depth value", DepthExportModes::NoDepthExport, 4, DepthExportModesLabels);
         Settings.AddSetting(&DepthExportMode);
 
-        UAVWriteMode.Initialize("UAVWriteMode", "Test Config", "UAVWrite Mode", "", UAVWriteModes::NoUAV, 3, UAVWriteModesLabels);
+        UAVWriteMode.Initialize("UAVWriteMode", "Test Config", "UAVWrite Mode", "controls what sort of UAV write occurrs from the pixel shader ", UAVWriteModes::NoUAV, 3, UAVWriteModesLabels);
         Settings.AddSetting(&UAVWriteMode);
 
-        ForceEarlyZ.Initialize("ForceEarlyZ", "Test Config", "Force Early Z", "", false);
+        ForceEarlyZ.Initialize("ForceEarlyZ", "Test Config", "Force Early Z", "if enabled, the pixel shader forces the hardware to perform all depth tests before the pixel shader executes using the [earlydepthstencil] attribute", false);
         Settings.AddSetting(&ForceEarlyZ);
 
-        ClearDepthToZero.Initialize("ClearDepthToZero", "Test Config", "Clear Depth To Zero", "", false);
+        ClearDepthToZero.Initialize("ClearDepthToZero", "Test Config", "Clear Depth To Zero", "clears the depth buffer to 0.0 instead of 1.0 before drawing the triangles, causing all drawn pixels to fail the depth test", false);
         Settings.AddSetting(&ClearDepthToZero);
 
-        BarrierBetweenDraws.Initialize("BarrierBetweenDraws", "Test Config", "Barrier Between Draws", "", false);
+        BarrierBetweenDraws.Initialize("BarrierBetweenDraws", "Test Config", "Barrier Between Draws", "issues a global memory barrier between the two triangle draws to force a stall + flush", false);
         Settings.AddSetting(&BarrierBetweenDraws);
 
         EnableVSync.Initialize("EnableVSync", "Debug", "Enable VSync", "Enables or disables vertical sync during Present", true);
