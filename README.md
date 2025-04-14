@@ -23,6 +23,8 @@ This app allows you to re-create various scenarios that may or may not interact 
   * `StandardUAV` - the pixel shader outputs its color to a `RWTexture2D<float4`
   * `ROV` - the pixel shader outputs its color to a `RasterizerOrderedTexture2D<float4>`
 * `Force Early Z` - if enabled, the pixel shader forces the hardware to perform all depth tests before the pixel shader executes using the `[earlydepthstencil]` attribute
+* `Clear Depth To Zero` - clears the depth buffer to 0.0 instead of 1.0 before drawing the triangles, causing all drawn pixels to fail the depth test.
+* `Barrier Between Draws` - issues a global memory barrier between the two triangle draws to force a stall + flush
 
 ## How To Build and Run
 
