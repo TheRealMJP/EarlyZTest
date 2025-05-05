@@ -227,12 +227,6 @@ struct DebugPrinter
     }
 };
 
-template<typename T, uint N> uint StrLen(T str[N])
-{
-    // Includes the null terminator
-    return N;
-}
-
 template<typename T> uint CharToUint(in T c)
 {
     if(c == ' ')
@@ -431,9 +425,13 @@ template<typename T> uint CharToUint(in T c)
 #define DebugPrint_(str, ...) do { \
     ShaderDebug::DebugPrinter printer; \
     printer.Init(); \
-    const uint strLen = ShaderDebug::StrLen(str); \
-    for(uint i = 0; i < strLen; ++i) \
-        printer.AppendChar(ShaderDebug::CharToUint(str[i])); \
+    uint charIdx = 0; \
+    while(ShaderDebug::CharToUint(str[charIdx]) != 0) \
+    { \
+        printer.AppendChar(ShaderDebug::CharToUint(str[charIdx])); \
+        charIdx += 1; \
+    } \
+    printer.AppendChar(0); \
     printer.StringSize = printer.ByteCount;  \
     printer.AppendArgs(__VA_ARGS__);   \
     printer.Commit(ShaderDebug::GetDebugInfo()); \
